@@ -35,7 +35,6 @@ class Planet implements CelestialObject {
   }
   
   void crash(){
-   //Not sure what this should do 
   }
   
   boolean Orbit(){
@@ -45,9 +44,6 @@ class Planet implements CelestialObject {
   int objectType(){
     return 1;
   }
-  
- /* boolean Crash(){
-  } Figure this out later*/
   
   float getOrbitRad(){
     float r = sqrt( sq(xCor - xCenter) + sq(yCor - yCenter)); 

@@ -11,8 +11,9 @@ class Star implements CelestialObject{
   
   color c;
   
-  Star(){
-  
+  Star(int x, int y){
+    xCor = x;
+    yCor = y;
     scaledRadius = 25;//NOT ACTUALLY TO SCALE
     
     float r = random(256);
@@ -23,9 +24,8 @@ class Star implements CelestialObject{
   }
   
   void add(){
-    xCor = getXCor(1);
-    yCor = getYCor(1);
-       
+    xCor = getXCor();
+    yCor = getYCor();
   }
   
   void draw(){
@@ -37,16 +37,12 @@ class Star implements CelestialObject{
     return true;
   }
   
-  double getXCor(int numStars){
-    return 500;
+  double getXCor(){
+    return xCor;
   }
   
-  double getYCor(int numStars){
-    return 300;
-  }
-  
-  void crash(){
-   //?? I don't think it should do anything 
+  double getYCor(){
+    return yCor;
   }
   
   int objectType(){

@@ -6,11 +6,14 @@ ArrayList<CelestialObject> lastAdded;
 //ArrayList lastAdded = new Arraylist();
 
 void setup(){
-  size(1000, 700);
+  size(600, 700);
   test = new Button();
   test.setup();
   lastAdded = new ArrayList();
-  numStars = 0;
+  
+    
+  Star sun = new Star(300, 300);
+  lastAdded.add(sun);
 }
 
 void draw(){

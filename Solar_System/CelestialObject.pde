@@ -1,0 +1,3 @@
+interface CelestialObject{
+  void draw();
+}
