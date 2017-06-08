@@ -7,6 +7,7 @@ class Asteroid {
   float xSpeed;
   float ySpeed;
   boolean placed = false;
+  boolean getAngle = false;
 
   color c;
 
@@ -27,13 +28,13 @@ class Asteroid {
     c = color( r, g, b );
   }
 
-  void draw() {
+  void draw() { 
     if (!placed) {
       fill(c);
       ellipse (mouseX, mouseY, 2*radius, 2*radius);
     } else {
-      
-        
+      getAngle = true;
+      mouseClicked();
       
       
       
@@ -42,6 +43,13 @@ class Asteroid {
     // this.move();
   }
 
+void mouseClicked(){
+  if(getAngle){
+    xCor = mouseX;
+    yCor = mouseY;
+  }
+  
+}
   void crash() {
   }
 
