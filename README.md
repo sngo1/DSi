@@ -17,6 +17,8 @@ Welcome to your very own solar system! This is a solar system simulation, where 
 - ##### Add an asteroid - after clicking this button, click once to place your asteroid in the solar system and click again in the direction you want it to move in.
 - ##### Add a planet - after clicking this button, click anywhere in the solar system to start a circular orbit around the Sun. 
 - ##### Add a star - after clicking this button, click anywhere in the solar system to place an immobile star.
+- ##### Remove last added object - click on the remove last button.
+- ##### Delete something - click on the delete button, then click on what you want to delete. If you change your mind, click on the delete button again.
 ## FAQs
 #### Q: There are too many choices! I can't decide what to put in my universe.
 A: Try the **RANDOM** button and let artificial randomness decide for you.
@@ -24,5 +26,7 @@ A: Try the **RANDOM** button and let artificial randomness decide for you.
 A: Use the **REMOVE LAST** button to remove the last thing that was added.
 #### Q: What if I want to remove one thing that wasn't the last thing but I still want to keep the last thing and also learn CS jargon so I can better communicate my common-user problems? 
 A: We thank you for your time and value your opinion. We hope you will stay with us until the release of DSi's Pocket Solar Systems 2.0!
+
+Delete
 
 ### "To infinity and beyond!" -Buzz Lightyear 
