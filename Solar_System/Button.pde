@@ -231,8 +231,13 @@ class Button {
       undoPressed = false;
     }
     if(mouseX>deleteX-deleteSize && mouseX<deleteX+deleteSize && mouseY>deleteY-deleteSize && mouseY<deleteY+deleteSize && mousePressed){
-     delete = true;
+     if(delete == false){
+      delete = true;
      deletePressed = false;
+     }
+     else{
+       delete = false;
+     }
     }
   }
 
