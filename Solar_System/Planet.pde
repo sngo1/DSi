@@ -120,4 +120,11 @@ class Planet implements CelestialObject {
       yCor = yCenter - sqrt(sq(scaledOrbitR) - sq(xCor-xCenter));
     }
   }
+  
+  Boolean isMouseOver(){
+   if(mouseX > xCor - planetRadius && mouseX < xCor + planetRadius && mouseY > yCor - planetRadius && mouseY < yCor + planetRadius){
+    return true; 
+   }
+   return false;
+  }
 }
