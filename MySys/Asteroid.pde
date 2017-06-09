@@ -39,7 +39,7 @@ class Asteroid {
       
       
       
-      
+    }
     // this.move();
   }
 

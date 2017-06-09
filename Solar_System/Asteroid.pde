@@ -1,5 +1,6 @@
 class Asteroid implements CelestialObject {
-
+  PImage asteroid = loadImage("asteroid.png");
+  
   float radius = 10;
   float xCor;
   float yCor;
@@ -20,13 +21,11 @@ class Asteroid implements CelestialObject {
   }
 
   void draw(){
-   ellipse (xCor, yCor, 2*radius, 2*radius);
-   fill(c);
+   image(asteroid, xCor, yCor, 60, 60);
    this.move();
   }
   
   void crash(){
-   //Not sure what this should do 
   }
   
   int objectType(){
@@ -37,10 +36,5 @@ class Asteroid implements CelestialObject {
    xCor += xSpeed / 60;
    yCor += ySpeed / 60;
   }
-  
-/*  void display() {
-    fill(c);
-    ellipse (  xCor, yCor, (float) ( 2 * radius ), (float) ( 2 * radius ) );
-  }*/
   
 }

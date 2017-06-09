@@ -1,5 +1,6 @@
-class Star implements CelestialObject{
-  
+class Star implements CelestialObject {
+  PImage star = loadImage("star.png");
+
   double radius;
   double scaledRadius;
   double speed;
@@ -8,44 +9,42 @@ class Star implements CelestialObject{
   double yCor;
   double mass;
   int type; //0 = 
-  
+
   color c;
-  
-  Star(int x, int y){
-    xCor = x;
-    yCor = y;
-    scaledRadius = 25;//NOT ACTUALLY TO SCALE
-    
+
+  Star(int x, int y) {
+    xCor = (int) random(600);
+    yCor = (int) random(600);
+    scaledRadius = 5;// NOT ACTUALLY TO SCALE
+
     float r = random(256);
     float g = random(256);
     float b = random(256);
-    c = color( r , g , b );
-    
+    c = color( r, g, b );
   }
-  
-  void add(){
+
+  void add() {
     xCor = getXCor();
     yCor = getYCor();
   }
-  
-  void draw(){
-    ellipse ( (float)xCor, (float)yCor, (float) ( 2 * scaledRadius ), (float)( 2 * scaledRadius ) );
-    fill(c);
+
+  void draw() {
+    image(star, (float)xCor, (float)yCor, 30, 30);
   }
-  
-  boolean Move(){
+
+  boolean Move() {
     return true;
   }
-  
-  double getXCor(){
+
+  double getXCor() {
     return xCor;
   }
-  
-  double getYCor(){
+
+  double getYCor() {
     return yCor;
   }
-  
-  int objectType(){
-   return 0; 
+
+  int objectType() {
+    return 0;
   }
 }
