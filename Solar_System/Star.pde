@@ -1,7 +1,7 @@
 class Star implements CelestialObject {
   PImage star = loadImage("star.png");
 
-  double radius;
+  double radius = 7;
   double scaledRadius;
   double speed;
   double scaledSpeed;
