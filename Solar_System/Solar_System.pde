@@ -13,9 +13,17 @@ void setup() {
   test = new Button();
   test.setup();
   lastAdded = new ArrayList();
-
+  
+   int sunType = (int) random(2);
+   if(sunType==0){
   sun = loadImage("sun.png");
+   }
+   else if(sunType==1){
+    sun = loadImage("sun1.png"); 
+   }
+
 }
+
 
 void draw() {
   if(delete == true){
