@@ -59,14 +59,14 @@ class Button {
     currentColor = baseColor;
 
     // Sets the coordinates
-    asterX = width/2-asterSize-100;
-    asterY = height/2-asterSize/2+300;
-    planetX = width/2-planetSize-25;
-    planetY = height/2-planetSize/2+300;
-    starX = width/2-starSize+50;
-    starY = height/2-starSize/2+300;
+    asterX = 150;
+    asterY = 650;
+    planetX = 250;
+    planetY = 650;
+    starX = 350;
+    starY = 650;
     randX = width/2+randSize/2-275;
-    randY = height/2+300;
+    randY = 650;
     undoColor = color(0);
     undoX = 400;
     undoY = height/2+270;
@@ -206,16 +206,6 @@ class Button {
       delay(300);
     }
     if (starPressed) {
-    /*  fill(starColor);
-      ellipse(mouseX, mouseY, 33, 33);
-      if (mousePressed && inSystem(mouseX, mouseY)) {
-        int addX = mouseX;
-        int addY = mouseY;
-        Star q = new Star(addX, addY);
-        q.add();
-        lastAdded.add(q);
-        delay(300);
-      }*/
        state = 3;
         starPressed = false;
         stateJustChanged = true;
@@ -226,7 +216,9 @@ class Button {
       delay(300);
       undoPressed = false;
     }
-    if (mouseX>deleteX-deleteSize && mouseX<deleteX+deleteSize && mouseY>deleteY-deleteSize && mouseY<deleteY+deleteSize && mousePressed) {
+    int c = deleteX+deleteSize/2;
+    int v = deleteY + deleteSize/2;
+    if (mouseX>c-40 && mouseX<c+40 && mouseY>v-40 && mouseY<v+40 && mousePressed) {
       if (delete == false) {
         delete = true;
         deletePressed = false;
@@ -284,8 +276,8 @@ class Button {
   }
 
   boolean overAster(int x, int y, int width, int height) {
-    if (mouseX >= x && mouseX <= x+width && 
-      mouseY >= y && mouseY <= y+height) {
+    if (mouseX >= asterX-40 && mouseX <= asterX+40 && 
+      mouseY >= asterY-40 && mouseY <= asterY+40) {
       return true;
     } else {
       return false;
@@ -293,7 +285,9 @@ class Button {
   }
 
   boolean overUndo() {
-    if (mouseX < undoX+starSize && mouseX > undoX-starSize && mouseY > undoY - starSize && mouseY < undoY +starSize) {
+    float w = undoX + starSize/2;
+    float e = undoY +starSize/2;
+    if (mouseX < w+30 && mouseX > w-30 && mouseY > e - 30 && mouseY < e +30) {
       return true;
     } else {
       return false;
@@ -301,8 +295,8 @@ class Button {
   }
 
   boolean overPlanet(int x, int y, int width, int height) {
-    if (mouseX >= x && mouseX <= x+width && 
-      mouseY >= y && mouseY <= y+height) {
+    if (mouseX >= planetX-40 && mouseX <= planetX+40 && 
+      mouseY >= planetY-40 && mouseY <= planetY+40) {
       return true;
     } else {
       return false;
@@ -310,8 +304,8 @@ class Button {
   }
 
   boolean overStar(int x, int y, int width, int height) {
-    if (mouseX >= x && mouseX <= x+width && 
-      mouseY >= y && mouseY <= y+height) {
+    if (mouseX >= starX-40 && mouseX <= starX+40 && 
+      mouseY >= starY-40 && mouseY <= starY+40) {
       return true;
     } else {
       return false;

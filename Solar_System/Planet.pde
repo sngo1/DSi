@@ -1,5 +1,10 @@
 class Planet implements CelestialObject {
 
+  PImage planet1 = loadImage("planet1.png");
+  PImage planet2 = loadImage("planet2.png");
+  PImage planet3 = loadImage("planet3.png");
+  PImage planet4 = loadImage("planet4.png");
+  
   float planetRadius = 16;
   // double speed;
   float xCor;
@@ -10,23 +15,36 @@ class Planet implements CelestialObject {
   float q;
   float changeX = 1;
   color c;
+  int planetType;
 
   Planet(int x, int y) {
     xCor = x;
     yCor = y;
     scaledOrbitR = getOrbitRad();
-
-    float r = random(256);
+    planetType = (int) random(4);
+/*    float r = random(256);
     float g = random(256);
     float b = random(256);
-    c = color( r, g, b );
+    c = color( r, g, b );*/
   }
 
   void draw() {
     orbit();
-    noStroke();
-    ellipse ( xCor, yCor, 2 * planetRadius, 2 * planetRadius);
-    fill(c);
+    if(planetType == 0){
+      image(planet1, (float)  xCor, (float) yCor, 30, 30);
+    }
+    else if(planetType ==1){
+      image(planet2, (float)  xCor, (float) yCor, 70, 70);      
+    }
+    else if(planetType ==2){
+        image(planet3, (float)  xCor, (float) yCor, 40, 40);
+    }
+    else if(planetType ==3){
+      image(planet4, (float)  xCor, (float) yCor, 20, 20);      
+    }
+    //noStroke();
+    //ellipse ( xCor, yCor, 2 * planetRadius, 2 * planetRadius);
+    //fill(c);
   }
 
   void crash() {
