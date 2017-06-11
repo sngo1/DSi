@@ -230,8 +230,10 @@ class Button {
       if (delete == false) {
         delete = true;
         deletePressed = false;
+        delay(300);
       } else {
         delete = false;
+        delay(300);
       }
     }
     if(! stateJustChanged){
