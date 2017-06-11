@@ -1,4 +1,6 @@
 int numStars; // Can't be greater than 5
+Boolean delete = false;
+
 Button test;
 
 ArrayList<CelestialObject> lastAdded;
@@ -15,6 +17,14 @@ void setup() {
 }
 
 void draw() {
+  if(delete == true){
+    for(int x = 0; x < lastAdded.size(); x++){
+      if(lastAdded.get(x).isMouseOver() && mousePressed){
+       lastAdded.remove(x); 
+       delete = false;
+      }
+    }
+  }
   test.draw();
   for (CelestialObject e : lastAdded) {
     e.draw();

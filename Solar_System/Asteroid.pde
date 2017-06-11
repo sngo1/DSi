@@ -37,4 +37,11 @@ class Asteroid implements CelestialObject {
    yCor += ySpeed / 60;
   }
   
+  Boolean isMouseOver(){
+      if(mouseX > xCor - radius && mouseX < xCor + radius && mouseY > yCor - radius && mouseY < yCor + radius){
+    return true; 
+   }
+   return false; 
+  }
+  
 }

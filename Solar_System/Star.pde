@@ -1,7 +1,7 @@
 class Star implements CelestialObject {
   PImage star = loadImage("star.png");
 
-  double radius;
+  double radius = 7;
   double scaledRadius;
   double speed;
   double scaledSpeed;
@@ -46,5 +46,12 @@ class Star implements CelestialObject {
 
   int objectType() {
     return 0;
+  }
+  
+  Boolean isMouseOver(){
+      if(mouseX > xCor - radius && mouseX < xCor + radius && mouseY > yCor - radius && mouseY < yCor + radius){
+    return true; 
+   }
+   return false;
   }
 }

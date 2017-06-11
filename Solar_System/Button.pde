@@ -6,12 +6,16 @@ class Button {
   int starX, starY;      // Position of STAR button
   int randX, randY;      // Position of RANDADD button
   int undoX, undoY;
+  int deleteX, deleteY;
+  
   int asterSize = 60;    // Diameter of ASTEROID button
   int planetSize = 60;   // Diameter of PLANET
   int starSize = 60;     // Diameter of STAR button
   int randSize = 63;     // Diameter of RANDADD button
   int undoSize = 60;
-  color asterColor, planetColor, starColor, randColor, baseColor;
+  int deleteSize = 60;
+  
+  color asterColor, planetColor, starColor, randColor, baseColor, deleteColor;
   color asterHighlight, planetHighlight, starHighlight, randHighlight;
   color currentColor;
   color undoColor;
@@ -20,11 +24,14 @@ class Button {
   boolean starOver = false;
   boolean randOver = false;
   boolean undoOver = false;
+  boolean deleteOver = false;
+  
   boolean asterPressed = false;
   boolean planetPressed = false;
   boolean starPressed = false;
   boolean randPressed = false;
   boolean undoPressed = false;
+  boolean deletePressed = false;
   //----------------------------------------------------------------------
 
   //FOOTER SETUP----------------------------------------------------------
@@ -35,7 +42,10 @@ class Button {
   //----------------------------------------------------------------------
 
   void setup() {
-    // Sets all the colors needed
+    // size(1000, 700);
+
+    //BUTTON--------------------
+    deleteColor = color(255, 255, 255);
     asterColor = color(255, 0, 128);
     asterHighlight = color(255, 0, 128, 191);
     planetColor = color(163, 73, 164);
@@ -59,6 +69,10 @@ class Button {
     undoColor = color(0);
     undoX = 400;
     undoY = height/2+270;
+    deleteX = 500;
+    deleteY = height/2+270;
+
+    //--------------------------
 
     // Sets up toolbar dimensions
     footerColor = color(#89c6de);
@@ -145,6 +159,11 @@ class Button {
     rect(undoX, undoY, starSize, starSize);
     text("REMOVE LAST", undoX, undoY);
     fill(undoColor);
+    
+    stroke(255);
+    rect(deleteX, deleteY, deleteSize, deleteSize);
+    text("DELETE", deleteX, deleteY);
+    fill(deleteColor);
     //--------------------------
 
     if (randPressed) {
@@ -208,6 +227,7 @@ class Button {
         //     planets.add(p);
         lastAdded.add(p);
       }
+      
       /*
     if(mousePressed && newPlanet){
        int addX = mouseX;
@@ -238,6 +258,15 @@ class Button {
       removeLast(); 
       delay(300);
       undoPressed = false;
+    }
+    if(mouseX>deleteX-deleteSize && mouseX<deleteX+deleteSize && mouseY>deleteY-deleteSize && mouseY<deleteY+deleteSize && mousePressed){
+     if(delete == false){
+      delete = true;
+     deletePressed = false;
+     }
+     else{
+       delete = false;
+     }
     }
   }
 
@@ -336,4 +365,6 @@ class Button {
       return false;
     }
   }
+  
+
 }
