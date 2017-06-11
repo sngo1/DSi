@@ -7,21 +7,16 @@ class Asteroid implements CelestialObject {
   float xSpeed;
   float ySpeed;
 
-  color c;
 
   Asteroid(int firstX, int firstY, int secondX, int secondY) {
     xCor = firstX;
     yCor = firstY;
     xSpeed = secondX - firstX;
     ySpeed = secondY - firstY;
-    float r = random(256);
-    float g = random(256);
-    float b = random(256);
-    c = color( r, g, b );
   }
 
   void draw(){
-   image(asteroid, xCor, yCor, 60, 60);
+   image(asteroid, xCor, yCor, 30, 30);
    this.move();
   }
   

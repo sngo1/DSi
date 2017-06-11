@@ -1,6 +1,4 @@
 class Button {
-  PImage asteroid = loadImage("asteroid.png");
-  PImage star = loadImage("star.png");
 
   //BUTTON SETUP----------------------------------------------------------
   int asterX, asterY;    // Position of ASTEROID button
@@ -16,6 +14,7 @@ class Button {
   int randSize = 63;     // Diameter of RANDADD button
   int undoSize = 60;
   int deleteSize = 60;
+  Boolean stateJustChanged = false;
 
   color asterColor, planetColor, starColor, randColor, baseColor, deleteColor;
   color asterHighlight, planetHighlight, starHighlight, randHighlight;
@@ -60,14 +59,14 @@ class Button {
     currentColor = baseColor;
 
     // Sets the coordinates
-    asterX = width/2-asterSize-100;
-    asterY = height/2-asterSize/2+300;
-    planetX = width/2-planetSize-25;
-    planetY = height/2-planetSize/2+300;
-    starX = width/2-starSize+50;
-    starY = height/2-starSize/2+300;
+    asterX = 150;
+    asterY = 650;
+    planetX = 250;
+    planetY = 650;
+    starX = 350;
+    starY = 650;
     randX = width/2+randSize/2-275;
-    randY = height/2+300;
+    randY = 650;
     undoColor = color(0);
     undoX = 400;
     undoY = height/2+270;
@@ -82,6 +81,7 @@ class Button {
     footerY = height-footerHeight;
   }
 
+
   void draw() {
     update(mouseX, mouseY);
     background(currentColor);
@@ -90,18 +90,12 @@ class Button {
     fill(footerColor);
     rect(footerX, footerY, footerWidth, footerHeight);
 
-    // Draws Buttons
-    noStroke();
-    fill(255);
-    ellipse(50, 650, 70, 70);
-    fill(133, 50, 150);
-    ellipseMode(CENTER);
-    ellipse(50, 650, 60, 60);
-    fill(255);
-    textSize(16);
-    textAlign(CENTER);
-    text("RANDOM", 50, 650);
 
+    if (asterOver) {
+      fill(asterHighlight);
+    } else {
+      fill(asterColor);
+    }
     noStroke();
     fill(255);
     ellipse(150, 650, 70, 70);
@@ -112,6 +106,11 @@ class Button {
     textAlign(CENTER);
     text("ASTEROID", 150, 650);
 
+    if (planetOver) {
+      fill(planetHighlight);
+    } else {
+      fill(planetColor);
+    }
     noStroke();
     fill(255);
     ellipse(250, 650, 70, 70);
@@ -123,6 +122,12 @@ class Button {
     textAlign(CENTER);
     text("PLANET", 250, 650);
 
+
+    if (starOver) {
+      fill(starHighlight);
+    } else {
+      fill(starColor);
+    }
     noStroke();
     fill(255);
     ellipse(350, 650, 70, 70);
@@ -134,27 +139,32 @@ class Button {
     textAlign(CENTER);
     text("STAR", 350, 650);
 
-    noStroke();
-    fill(255);
-    ellipse(450, 650, 70, 70);
-    fill(133, 50, 150);
-    ellipseMode(CENTER);
-    ellipse(450, 650, 60, 60);
-    fill(255);
-    textSize(16);
-    textAlign(CENTER);
-    text("REMOVE LAST", 450, 650);
 
+    if (randOver) {
+      fill(randHighlight);
+    } else {
+      fill(randColor);
+    }
     noStroke();
     fill(255);
-    ellipse(550, 650, 70, 70);
+    ellipse(50, 650, 70, 70);
     fill(133, 50, 150);
     ellipseMode(CENTER);
-    ellipse(550, 650, 60, 60);
+    ellipse(50, 650, 60, 60);
     fill(255);
     textSize(16);
     textAlign(CENTER);
-    text("DELETE", 550, 650);
+    text("RANDOM", 50, 650);
+
+    stroke(255);
+    rect(undoX, undoY, starSize, starSize);
+    text("REMOVE LAST", undoX, undoY);
+    fill(undoColor);
+
+    stroke(255);
+    rect(deleteX, deleteY, deleteSize, deleteSize);
+    text("DELETE", deleteX, deleteY);
+    fill(deleteColor);
     //--------------------------
 
     if (randPressed) {
@@ -163,86 +173,42 @@ class Button {
       // 0 = Asteroid
       if (choice == 0) {
         asterPressed = false;
-        if (mousePressed && inSystem(mouseX, mouseY)) {
-          int addX = mouseX;
-          int addY = mouseY;
-          Asteroid a = new Asteroid(addX, addY, 300, 300);
-          lastAdded.add(a);
-        }
+        state = 2;
+        stateJustChanged = true;
       } 
       // 1 = Planet
       else if (choice == 1) {
         planetPressed = false;
-        if (mousePressed && inSystem(mouseX, mouseY)) {
-          int addX = 150;
-          int addY = 450;
-          Planet p = new Planet(addX, addY);
-          lastAdded.add(p);
-        }
-      } 
+        state = 1;
+        stateJustChanged = true;
+      }
+
       // 2 = Star
       else if (choice == 2) {
-        if (mousePressed && inSystem(mouseX, mouseY)) {
-          int addX = mouseX;
-          int addY = mouseY;
-          Star q = new Star(addX, addY);
-          q.add();
-          lastAdded.add(q);
-          delay(300);
-        }
+        state = 3;
         starPressed = false;
+        stateJustChanged = true;
       }
       delay(300);
     }
     // Asteroid Button Pressed
     if (asterPressed) {
       asterPressed = false;
-      if (mousePressed && inSystem(mouseX, mouseY)) {
-        int addX = mouseX;
-        int addY = mouseY;
-        int dirX = 300;
-        int dirY = 300;
-        Asteroid a = new Asteroid(addX, addY, dirX, dirY);
-        lastAdded.add(a);
-      }
+      state = 2;
+      stateJustChanged = true;
       delay(300);
     }
     if (planetPressed) {
-      // fill(planetColor);
-      // ellipse(mouseX, mouseY, 33, 33);
       planetPressed = false;
-      if (mousePressed && inSystem(mouseX, mouseY)) {
-        int addX = 160;
-        int addY = 460;
-        Planet p = new Planet(addX, addY);
-        //     planets.add(p);
-        lastAdded.add(p);
-      }
+      state = 1;
+      stateJustChanged = true;
 
-      /*
-    if(mousePressed && newPlanet){
-       int addX = mouseX;
-       int addY = mouseY;
-       Planet p = new Planet(addX, addY);
-       planets.add(p);
-       lastAdded.add(p);
-       newPlanet = false;
-       }
-       */
       delay(300);
     }
     if (starPressed) {
-      fill(starColor);
-      ellipse(mouseX, mouseY, 33, 33);
-      if (mousePressed && inSystem(mouseX, mouseY)) {
-        int addX = mouseX;
-        int addY = mouseY;
-        Star q = new Star(addX, addY);
-        q.add();
-        //       stars.add(q);
-        lastAdded.add(q);
-        delay(300);
-      }
+       state = 3;
+        starPressed = false;
+        stateJustChanged = true;
       starPressed = false;
     }
     if (undoPressed) {
@@ -250,14 +216,22 @@ class Button {
       delay(300);
       undoPressed = false;
     }
-    if (mouseX>deleteX-deleteSize && mouseX<deleteX+deleteSize && mouseY>deleteY-deleteSize && mouseY<deleteY+deleteSize && mousePressed) {
+    int c = deleteX+deleteSize/2;
+    int v = deleteY + deleteSize/2;
+    if (mouseX>c-40 && mouseX<c+40 && mouseY>v-40 && mouseY<v+40 && mousePressed) {
       if (delete == false) {
         delete = true;
         deletePressed = false;
+        delay(300);
       } else {
         delete = false;
+        delay(300);
       }
     }
+    if(! stateJustChanged){
+    makeObject();
+    }
+    stateJustChanged = false;
   }
 
   void update(int x, int y) {
@@ -302,8 +276,8 @@ class Button {
   }
 
   boolean overAster(int x, int y, int width, int height) {
-    if (mouseX >= x && mouseX <= x+width && 
-      mouseY >= y && mouseY <= y+height) {
+    if (mouseX >= asterX-40 && mouseX <= asterX+40 && 
+      mouseY >= asterY-40 && mouseY <= asterY+40) {
       return true;
     } else {
       return false;
@@ -311,7 +285,9 @@ class Button {
   }
 
   boolean overUndo() {
-    if (mouseX < undoX+starSize && mouseX > undoX-starSize && mouseY > undoY - starSize && mouseY < undoY +starSize) {
+    float w = undoX + starSize/2;
+    float e = undoY +starSize/2;
+    if (mouseX < w+30 && mouseX > w-30 && mouseY > e - 30 && mouseY < e +30) {
       return true;
     } else {
       return false;
@@ -319,8 +295,8 @@ class Button {
   }
 
   boolean overPlanet(int x, int y, int width, int height) {
-    if (mouseX >= x && mouseX <= x+width && 
-      mouseY >= y && mouseY <= y+height) {
+    if (mouseX >= planetX-40 && mouseX <= planetX+40 && 
+      mouseY >= planetY-40 && mouseY <= planetY+40) {
       return true;
     } else {
       return false;
@@ -328,8 +304,8 @@ class Button {
   }
 
   boolean overStar(int x, int y, int width, int height) {
-    if (mouseX >= x && mouseX <= x+width && 
-      mouseY >= y && mouseY <= y+height) {
+    if (mouseX >= starX-40 && mouseX <= starX+40 && 
+      mouseY >= starY-40 && mouseY <= starY+40) {
       return true;
     } else {
       return false;
@@ -346,6 +322,7 @@ class Button {
     }
   }
 
+
   boolean inSystem(int x, int y) {
     if (mouseX >= x && mouseX <= x+600 && 
       mouseY >= y && mouseY <= y+600) {
@@ -354,4 +331,34 @@ class Button {
       return false;
     }
   }
-}
+
+  void makeObject() {
+    if (mousePressed) {
+      if (state ==2) {
+        if (mousePressed && inSystem(mouseX, mouseY)) {
+          int addX = mouseX;
+          int addY = mouseY;
+          Asteroid a = new Asteroid(asterX, asterY, addX, addY);
+          lastAdded.add(a);
+          state = 0;
+        }
+      } else if (state ==1) {
+        if (inSystem(mouseX, mouseY)) {
+          int addX = mouseX;
+          int addY = mouseY;
+          Planet p = new Planet(addX, addY);
+          lastAdded.add(p);
+        }
+      }else if (state == 3) {
+          if (inSystem(mouseX, mouseY)) {
+            int addX = mouseX;
+            int addY = mouseY;
+            Star q = new Star(addX, addY);
+            q.add();
+            lastAdded.add(q);
+          }
+        }
+        state = 0;
+      }
+    }
+  }

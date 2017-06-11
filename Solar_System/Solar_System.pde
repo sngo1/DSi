@@ -1,5 +1,6 @@
 int numStars; // Can't be greater than 5
 Boolean delete = false;
+int state = 0; // 0 does nothing, 1 adds planets, 2 adds asteroids
 
 Button test;
 
@@ -12,9 +13,20 @@ void setup() {
   test = new Button();
   test.setup();
   lastAdded = new ArrayList();
-
+  
+   int sunType = (int) random(3);
+   if(sunType==0){
   sun = loadImage("sun.png");
+   }
+   else if(sunType==1){
+    sun = loadImage("sun1.png"); 
+   }
+   else if(sunType ==2){
+    sun = loadImage("sun2.png"); 
+   }
+
 }
+
 
 void draw() {
   if(delete == true){
