@@ -35,9 +35,7 @@ class Button {
   //----------------------------------------------------------------------
 
   void setup() {
-    // size(1000, 700);
-
-    //BUTTON--------------------
+    // Sets all the colors needed
     asterColor = color(255, 0, 128);
     asterHighlight = color(255, 0, 128, 191);
     planetColor = color(163, 73, 164);
@@ -48,6 +46,8 @@ class Button {
     randHighlight = color(209);
     baseColor = color(0);
     currentColor = baseColor;
+
+    // Sets the coordinates
     asterX = width/2-asterSize-100;
     asterY = height/2-asterSize/2+300;
     planetX = width/2-planetSize-25;
@@ -59,13 +59,11 @@ class Button {
     undoColor = color(0);
     undoX = 400;
     undoY = height/2+270;
-    //--------------------------
 
-    //FOOTER--------------------
+    // Sets up toolbar dimensions
     footerColor = color(#89c6de);
     footerX = 0;
     footerY = height-footerHeight;
-    //--------------------------
   }
 
 
@@ -73,47 +71,75 @@ class Button {
     update(mouseX, mouseY);
     background(currentColor);
 
-    //FOOTER--------------------
+    // Footer
     fill(footerColor);
     rect(footerX, footerY, footerWidth, footerHeight);
-    //--------------------------
 
-    //BUTTON--------------------
+
     if (asterOver) {
       fill(asterHighlight);
     } else {
       fill(asterColor);
     }
-    stroke(255);
-    rect(asterX, asterY, asterSize, asterSize);
-    text("ASTEROID", asterX, asterY);
+    noStroke();
+    fill(255);
+    ellipse(150,650, 70, 70);
+    fill(asterColor);
+    ellipseMode(CENTER);
+    ellipse(150, 650, 60, 60);
+    fill(0);
+    textAlign(CENTER);
+    text("ASTEROID", 150, 650);
 
     if (planetOver) {
       fill(planetHighlight);
     } else {
       fill(planetColor);
     }
-    stroke(255);
-    rect(planetX, planetY, planetSize, planetSize);
-    text("PLANET", planetX+10, planetY);
+    noStroke();
+    fill(255);
+    ellipse(250,650, 70, 70);
+    fill(34, 120, 0);
+    ellipseMode(CENTER);
+    ellipse(250, 650, 60, 60);
+    fill(0);
+    textSize(16);
+    textAlign(CENTER);
+    text("PLANET", 250, 650);
+
 
     if (starOver) {
       fill(starHighlight);
     } else {
       fill(starColor);
     }
-    stroke(255);
-    rect(starX, starY, starSize, starSize);
-    text("STAR", starX+15, starY);
+    noStroke();
+    fill(255);
+    ellipse(350,650, 70, 70);
+    fill(133, 50, 150);
+    ellipseMode(CENTER);
+    ellipse(350, 650, 60, 60);
+    fill(255);
+    textSize(16);
+    textAlign(CENTER);
+    text("STAR", 350, 650);
+
 
     if (randOver) {
       fill(randHighlight);
     } else {
       fill(randColor);
     }
-    stroke(0);
-    ellipse(randX, randY, randSize, randSize);
-    text("RANDOM", randX-randSize/2+7, randY-randSize/2-1);
+    noStroke();
+    fill(255);
+    ellipse(50,650, 70, 70);
+    fill(133, 50, 150);
+    ellipseMode(CENTER);
+    ellipse(50, 650, 60, 60);
+    fill(255);
+    textSize(16);
+    textAlign(CENTER);
+    text("RANDOM", 50, 650);
 
     stroke(255);
     rect(undoX, undoY, starSize, starSize);
@@ -123,7 +149,7 @@ class Button {
 
     if (randPressed) {
       randPressed = false;
-      int choice = (int)random(3);
+      int choice = (int) random(3);
       // 0 = Asteroid
       if (choice == 0) {
         asterPressed = false;
