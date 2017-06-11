@@ -84,5 +84,36 @@ Vernita :: Added ADD methods to Asteroid, Star, Planet
 2017-05-31
 --------------------------------------------------------------
 Samantha :: 
-Despoina :: Worked on keyboard input for planet and displaying star in center and planets
-Vernita :: 
+Despoina :: Worked on keyboard input for planet and displaying star in center and planets and arrayLists for containing stars, planets, and asteroids. 
+Vernita :: Worked on Button.
+
+2017-06-01
+-------------------------------------------------------------
+Despoina :: Worked on physics and planet orbit.
+
+2017-06-02
+--------------------------------------------------------------
+Despoina :: Worked on asteroid and planet orbit
+
+2017-06-05
+--------------------------------------------------------------
+Samantha :: Basic orbit
+Despoina :: Basic orbit. Added stack for lastAdded and celestialObject interface.
+Vernita :: Basic orbit
+
+2017-06-07
+------------------------------------------------------------
+Vernita :: Interface. Added add methods and updated Button.pde
+
+2017-06-08
+------------------------------------------------------------
+Samantha :: Updated readme.txt. Moved files
+
+2017-06-09
+--------------------------------------------------------------
+Despoina :: Added delete button and isMouseOver() for celestialObject interface. Edited readme.txt
+
+2017-06-11
+-------------------------------------------------------------
+Samantha :: Changed buttons.
+Despoina :: Fixed mouse input for placing asteroids, planets, and stars. Fixed orbit bug that caused planets to "bounce". Added 	    images for planets and stars. Fixed buttons.
