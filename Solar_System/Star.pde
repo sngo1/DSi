@@ -10,11 +10,17 @@ class Star implements CelestialObject {
   double mass;
   int type; //0 = 
 
+  color c;
 
   Star(int x, int y) {
-    xCor = x;
-    yCor = y;
+    xCor = (int) random(600);
+    yCor = (int) random(600);
     scaledRadius = 5;// NOT ACTUALLY TO SCALE
+
+    float r = random(256);
+    float g = random(256);
+    float b = random(256);
+    c = color( r, g, b );
   }
 
   void add() {
@@ -43,8 +49,7 @@ class Star implements CelestialObject {
   }
   
   Boolean isMouseOver(){
-      if(mouseX > xCor - radius && mouseX < xCor + radius && mouseY > yCor - radius && mouseY < yCor + radius)
-      {
+      if(mouseX > xCor - radius && mouseX < xCor + radius && mouseY > yCor - radius && mouseY < yCor + radius){
     return true; 
    }
    return false;
