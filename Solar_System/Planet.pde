@@ -123,6 +123,8 @@ class Planet implements CelestialObject {
 */
 
   void orbit() {
+    
+    if(yCor > yCenter){
     if ( xCor >= xCenter + scaledOrbitR) {
       changeX = -1;
       q = 0;
@@ -130,6 +132,8 @@ class Planet implements CelestialObject {
       changeX = 1;
       q = 1;
     }
+    }
+=
     xCor += changeX; 
 
     if ( q == 1) {
