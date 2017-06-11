@@ -133,7 +133,7 @@ class Planet implements CelestialObject {
       q = 1;
     }
     }
-=
+
     xCor += changeX; 
 
     if ( q == 1) {

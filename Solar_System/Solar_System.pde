@@ -14,12 +14,15 @@ void setup() {
   test.setup();
   lastAdded = new ArrayList();
   
-   int sunType = (int) random(2);
+   int sunType = (int) random(3);
    if(sunType==0){
   sun = loadImage("sun.png");
    }
    else if(sunType==1){
     sun = loadImage("sun1.png"); 
+   }
+   else if(sunType ==2){
+    sun = loadImage("sun2.png"); 
    }
 
 }
