@@ -14,7 +14,7 @@
 ## The Big Bang Theory
 Welcome to your very own solar system! This is a solar system simulation, where you will be able to add and remove asteroids, planets, and stars. We hope you enjoy a peek into an alternate universe!
 #### In this universe, you can choose to...
-- ##### Add an asteroid - after clicking this button, click once to place your asteroid in the solar system and click again in the direction you want it to move in.
+- ##### Add an asteroid - after clicking this button, click once anywhere in the solar system. The asteroids appears at the asteroid button and moves in the direction your mouse is in. The farther away the mouse is, the faster the asteroid goes.
 - ##### Add a planet - after clicking this button, click anywhere in the solar system to start a circular orbit around the Sun. 
 - ##### Add a star - after clicking this button, click anywhere in the solar system to place an immobile star.
 - ##### Remove last added object - click on the remove last button.
