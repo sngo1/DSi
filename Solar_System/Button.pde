@@ -7,14 +7,15 @@ class Button {
   int randX, randY;      // Position of RANDADD button
   int undoX, undoY;
   int deleteX, deleteY;
-  
+
   int asterSize = 60;    // Diameter of ASTEROID button
   int planetSize = 60;   // Diameter of PLANET
   int starSize = 60;     // Diameter of STAR button
   int randSize = 63;     // Diameter of RANDADD button
   int undoSize = 60;
   int deleteSize = 60;
-  
+  Boolean stateJustChanged = false;
+
   color asterColor, planetColor, starColor, randColor, baseColor, deleteColor;
   color asterHighlight, planetHighlight, starHighlight, randHighlight;
   color currentColor;
@@ -25,7 +26,7 @@ class Button {
   boolean randOver = false;
   boolean undoOver = false;
   boolean deleteOver = false;
-  
+
   boolean asterPressed = false;
   boolean planetPressed = false;
   boolean starPressed = false;
@@ -97,7 +98,7 @@ class Button {
     }
     noStroke();
     fill(255);
-    ellipse(150,650, 70, 70);
+    ellipse(150, 650, 70, 70);
     fill(asterColor);
     ellipseMode(CENTER);
     ellipse(150, 650, 60, 60);
@@ -112,7 +113,7 @@ class Button {
     }
     noStroke();
     fill(255);
-    ellipse(250,650, 70, 70);
+    ellipse(250, 650, 70, 70);
     fill(34, 120, 0);
     ellipseMode(CENTER);
     ellipse(250, 650, 60, 60);
@@ -129,7 +130,7 @@ class Button {
     }
     noStroke();
     fill(255);
-    ellipse(350,650, 70, 70);
+    ellipse(350, 650, 70, 70);
     fill(133, 50, 150);
     ellipseMode(CENTER);
     ellipse(350, 650, 60, 60);
@@ -146,7 +147,7 @@ class Button {
     }
     noStroke();
     fill(255);
-    ellipse(50,650, 70, 70);
+    ellipse(50, 650, 70, 70);
     fill(133, 50, 150);
     ellipseMode(CENTER);
     ellipse(50, 650, 60, 60);
@@ -159,7 +160,7 @@ class Button {
     rect(undoX, undoY, starSize, starSize);
     text("REMOVE LAST", undoX, undoY);
     fill(undoColor);
-    
+
     stroke(255);
     rect(deleteX, deleteY, deleteSize, deleteSize);
     text("DELETE", deleteX, deleteY);
@@ -172,86 +173,52 @@ class Button {
       // 0 = Asteroid
       if (choice == 0) {
         asterPressed = false;
-        if (mousePressed && inSystem(mouseX, mouseY)) {
-          int addX = mouseX;
-          int addY = mouseY;
-          Asteroid a = new Asteroid(addX, addY, 300, 300);
-          lastAdded.add(a);
-        }
+        state = 2;
+        stateJustChanged = true;
       } 
       // 1 = Planet
       else if (choice == 1) {
         planetPressed = false;
-        if (mousePressed && inSystem(mouseX, mouseY)) {
-          int addX = 150;
-          int addY = 450;
-          Planet p = new Planet(addX, addY);
-          lastAdded.add(p);
-        }
-      } 
+        state = 1;
+        stateJustChanged = true;
+      }
+
       // 2 = Star
       else if (choice == 2) {
-        if (mousePressed && inSystem(mouseX, mouseY)) {
-          int addX = mouseX;
-          int addY = mouseY;
-          Star q = new Star(addX, addY);
-          q.add();
-          lastAdded.add(q);
-          delay(300);
-        }
+        state = 3;
         starPressed = false;
+        stateJustChanged = true;
       }
       delay(300);
     }
     // Asteroid Button Pressed
     if (asterPressed) {
       asterPressed = false;
-      if (mousePressed && inSystem(mouseX, mouseY)) {
-        int addX = mouseX;
-        int addY = mouseY;
-        int dirX = 300;
-        int dirY = 300;
-        Asteroid a = new Asteroid(addX, addY, dirX, dirY);
-        lastAdded.add(a);
-      }
+      state = 2;
+      stateJustChanged = true;
       delay(300);
     }
     if (planetPressed) {
-      // fill(planetColor);
-      // ellipse(mouseX, mouseY, 33, 33);
       planetPressed = false;
-      if (mousePressed && inSystem(mouseX, mouseY)) {
-        int addX = 160;
-        int addY = 460;
-        Planet p = new Planet(addX, addY);
-        //     planets.add(p);
-        lastAdded.add(p);
-      }
-      
-      /*
-    if(mousePressed && newPlanet){
-       int addX = mouseX;
-       int addY = mouseY;
-       Planet p = new Planet(addX, addY);
-       planets.add(p);
-       lastAdded.add(p);
-       newPlanet = false;
-       }
-       */
+      state = 1;
+      stateJustChanged = true;
+
       delay(300);
     }
     if (starPressed) {
-      fill(starColor);
+    /*  fill(starColor);
       ellipse(mouseX, mouseY, 33, 33);
       if (mousePressed && inSystem(mouseX, mouseY)) {
         int addX = mouseX;
         int addY = mouseY;
         Star q = new Star(addX, addY);
         q.add();
-        //       stars.add(q);
         lastAdded.add(q);
         delay(300);
-      }
+      }*/
+       state = 3;
+        starPressed = false;
+        stateJustChanged = true;
       starPressed = false;
     }
     if (undoPressed) {
@@ -259,15 +226,18 @@ class Button {
       delay(300);
       undoPressed = false;
     }
-    if(mouseX>deleteX-deleteSize && mouseX<deleteX+deleteSize && mouseY>deleteY-deleteSize && mouseY<deleteY+deleteSize && mousePressed){
-     if(delete == false){
-      delete = true;
-     deletePressed = false;
-     }
-     else{
-       delete = false;
-     }
+    if (mouseX>deleteX-deleteSize && mouseX<deleteX+deleteSize && mouseY>deleteY-deleteSize && mouseY<deleteY+deleteSize && mousePressed) {
+      if (delete == false) {
+        delete = true;
+        deletePressed = false;
+      } else {
+        delete = false;
+      }
     }
+    if(! stateJustChanged){
+    makeObject();
+    }
+    stateJustChanged = false;
   }
 
   void update(int x, int y) {
@@ -365,6 +335,34 @@ class Button {
       return false;
     }
   }
-  
 
-}
+  void makeObject() {
+    if (mousePressed) {
+      if (state ==2) {
+        if (mousePressed && inSystem(mouseX, mouseY)) {
+          int addX = mouseX;
+          int addY = mouseY;
+          Asteroid a = new Asteroid(asterX, asterY, addX, addY);
+          lastAdded.add(a);
+          state = 0;
+        }
+      } else if (state ==1) {
+        if (inSystem(mouseX, mouseY)) {
+          int addX = mouseX;
+          int addY = mouseY;
+          Planet p = new Planet(addX, addY);
+          lastAdded.add(p);
+        }
+      }else if (state == 3) {
+          if (inSystem(mouseX, mouseY)) {
+            int addX = mouseX;
+            int addY = mouseY;
+            Star q = new Star(addX, addY);
+            q.add();
+            lastAdded.add(q);
+          }
+        }
+        state = 0;
+      }
+    }
+  }

@@ -1,5 +1,6 @@
 int numStars; // Can't be greater than 5
 Boolean delete = false;
+int state = 0; // 0 does nothing, 1 adds planets, 2 adds asteroids
 
 Button test;
 
