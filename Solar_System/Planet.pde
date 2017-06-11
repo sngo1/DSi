@@ -14,7 +14,6 @@ class Planet implements CelestialObject {
   float yCenter = 300;
   float q;
   float changeX = 1;
-  color c;
   int planetType;
 
   Planet(int x, int y) {
@@ -22,10 +21,6 @@ class Planet implements CelestialObject {
     yCor = y;
     scaledOrbitR = getOrbitRad();
     planetType = (int) random(4);
-/*    float r = random(256);
-    float g = random(256);
-    float b = random(256);
-    c = color( r, g, b );*/
   }
 
   void draw() {
@@ -70,9 +65,11 @@ class Planet implements CelestialObject {
       } else {
         thirdQuad = true;
       }
-    } else if (yCor == yCenter) {
+    } 
+    else if (yCor == yCenter) {
       q = 2;
-    } else {
+    } 
+    else {
       if (yCor > yCenter) {
         fourthQuad = true;
       } else {
@@ -82,49 +79,16 @@ class Planet implements CelestialObject {
 
     if (firstQuad || secondQuad) {
       q = 0;
+      changeX = -1;
     } else if ( thirdQuad || fourthQuad) {
       q = 1;
     }
-
-    // ================================
-    /*   
-     if(yCor > yCenter){
-     q = 1; 
-     }
-     else if(yCor < yCenter){
-     q = 0; 
-     }
-     else{
-     if(xCor  < xCenter){
-     q = 0; 
-     }
-     else{
-     q = 1;
-     }
-     }*/
-
+    
     return r;
   }  
-/*
-  int keyPressed() {
-    /*   String str = "";
-     char ch;
-     if(key != 'a'){
-     ch = key;
-     str +=  Character.toString(ch);
-     }
-     if(str.equals("")){
-     return 0;
-     }
-     else{
-    int num = Character.getNumericValue(key);
-    return num;
-  }
-*/
 
-  void orbit() {
-    
-    if(yCor > yCenter){
+
+ void orbit() {
     if ( xCor >= xCenter + scaledOrbitR) {
       changeX = -1;
       q = 0;
@@ -132,8 +96,6 @@ class Planet implements CelestialObject {
       changeX = 1;
       q = 1;
     }
-    }
-
     xCor += changeX; 
 
     if ( q == 1) {

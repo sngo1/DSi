@@ -10,17 +10,11 @@ class Star implements CelestialObject {
   double mass;
   int type; //0 = 
 
-  color c;
 
   Star(int x, int y) {
     xCor = x;
     yCor = y;
     scaledRadius = 5;// NOT ACTUALLY TO SCALE
-
-    float r = random(256);
-    float g = random(256);
-    float b = random(256);
-    c = color( r, g, b );
   }
 
   void add() {
