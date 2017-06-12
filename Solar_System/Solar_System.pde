@@ -3,7 +3,7 @@ Boolean delete = false;
 int state = 0; // 0 does nothing, 1 adds planets, 2 adds asteroids
 boolean finish = false;
 boolean start = true;
-float xCor 150;
+float xCor = 150;
 float yCor = 407;
 int changeX = 1;
 int q;
@@ -97,6 +97,10 @@ void draw() {
 
   if (start) {
     background(255);
+
+    textSize(35);
+    fill(0);
+    text("DSi's Pocket Solar Systems", 300, 110);
 
     noStroke();
     fill(133, 0, 0);
