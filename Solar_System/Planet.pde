@@ -4,6 +4,10 @@ class Planet implements CelestialObject {
   PImage planet2 = loadImage("planet2.png");
   PImage planet3 = loadImage("planet3.png");
   PImage planet4 = loadImage("planet4.png");
+  color c;
+  int r = (int) random(256);
+  int g = (int) random(256);
+  int b = (int) random(256);
 
   float planetRadius = (int) random(5,31);
   float xCor;
@@ -14,11 +18,8 @@ class Planet implements CelestialObject {
   float q;
   float changeX = 1;
   int planetType;
-  color c;
-  int r = (int) random(256);
-  int g = (int) random(256);
-  int b = (int) random(256);
 
+  // Constructor - places the planet
   Planet(int x, int y) {
     xCor = x;
     yCor = y;
@@ -27,7 +28,9 @@ class Planet implements CelestialObject {
   }
 
   void draw() {
+    // Movement
     orbit();
+    // Randomizes a planet
     if (planetType <= 10) {
       image(planet1, xCor, yCor, 30, 30);
     } else if (planetType <= 20) {
@@ -53,17 +56,10 @@ class Planet implements CelestialObject {
     }
   }
 
-  void crash() {
-  }
-
-  int objectType() {
-    return 1;
-  }
-
+  // Determines which equation to use depending on the quadrant it is in.
   float getOrbitRad() {
     float r = sqrt( sq(xCor - xCenter) + sq(yCor - yCenter)); 
 
-    // ================================
     boolean firstQuad = false;
     boolean secondQuad = false;
     boolean thirdQuad = false;
@@ -86,8 +82,7 @@ class Planet implements CelestialObject {
       }
     }
 
-    if (firstQuad || secondQuad) {
-      q = 0;
+    if (firstQuad || secondQuad) {      q = 0;
       changeX = -1;
     } else if ( thirdQuad || fourthQuad) {
       q = 1;
@@ -96,7 +91,7 @@ class Planet implements CelestialObject {
     return r;
   }  
 
-
+  // Calculates x and y for an orbit
   void orbit() {
     if ( xCor >= xCenter + scaledOrbitR) {
       changeX = -1;
@@ -114,6 +109,7 @@ class Planet implements CelestialObject {
     }
   }
 
+  // Determines if the mouse is over a planet; used for deletions
   boolean isMouseOver() {
     if (mouseX > xCor - planetRadius && mouseX < xCor + planetRadius && mouseY > yCor - planetRadius && mouseY < yCor + planetRadius) {
       return true;
