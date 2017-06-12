@@ -91,7 +91,11 @@ class Button {
     noStroke();
     fill(255);
     ellipse(50, 650, 70, 70);
-    fill(255, 128, 0);
+    if (randOver) {
+      fill(200);
+    } else {
+      fill(255, 128, 0);
+    }
     ellipseMode(CENTER);
     ellipse(50, 650, 60, 60);
     fill(0);
@@ -103,8 +107,12 @@ class Button {
     noStroke();
     fill(255);
     ellipse(150, 650, 70, 70);
-    fill(164, 91, 94);
     ellipseMode(CENTER);
+    if (asterOver) {
+      fill(200);
+    } else {
+      fill(164, 91, 94);
+    }
     ellipse(150, 650, 60, 60);
     fill(0);
     textAlign(CENTER);
@@ -114,7 +122,11 @@ class Button {
     noStroke();
     fill(255);
     ellipse(250, 650, 70, 70);
-    fill(159, 96, 143);
+    if (planetOver) {
+      fill(200);
+    } else {
+      fill(159, 96, 143);
+    }
     ellipseMode(CENTER);
     ellipse(250, 650, 60, 60);
     fill(0);
@@ -126,7 +138,11 @@ class Button {
     noStroke();
     fill(255);
     ellipse(350, 650, 70, 70);
+    if (starOver) {
+      fill(200);
+    } else {
     fill(245, 204, 10);
+    }
     ellipseMode(CENTER);
     ellipse(350, 650, 60, 60);
     fill(0);
@@ -138,7 +154,11 @@ class Button {
     noStroke();
     fill(255);
     ellipse(450, 650, 70, 70);
+    if (undoOver) {
+      fill(200);
+    } else {
     fill(218, 37, 123);
+    }
     ellipseMode(CENTER);
     ellipse(450, 650, 60, 60);
     fill(0);
@@ -150,7 +170,11 @@ class Button {
     noStroke();
     fill(255);
     ellipse(550, 650, 70, 70);
+    if (deleteOver) {
+      fill(200);
+    } else {
     fill(234, 21, 53);
+    }
     ellipseMode(CENTER);
     ellipse(550, 650, 60, 60);
     fill(0);
@@ -236,7 +260,7 @@ class Button {
       lastAdded.remove( lastAdded.size() - 1);
     }
   }
-  
+
   // Determines if mouse is in solar system space
   boolean inSystem(int x, int y) {
     if (mouseX >= x && mouseX <= x+600 && 
@@ -372,7 +396,7 @@ class Button {
     return true;
   }
 
-
+  // Creates the appropriate object as selected
   void makeObject() {
     if (mousePressed) {
       // Adding planet
@@ -393,7 +417,9 @@ class Button {
           Planet p = new Planet(addX, addY);
           lastAdded.add(p);
         }
-      } else if (state == 3) {
+      }
+      // Adding Star
+      else if (state == 3) {
         if (inSystem(mouseX, mouseY)) {
           int addX = mouseX;
           int addY = mouseY;
@@ -402,6 +428,7 @@ class Button {
           lastAdded.add(q);
         }
       }
+      // Otherwise, nothing happens
       state = 0;
     }
   }
