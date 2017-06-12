@@ -1,6 +1,5 @@
 class Button {
-
-  //BUTTON SETUP----------------------------------------------------------
+  // Button Locations
   int asterX, asterY;    // Position of ASTEROID button
   int planetX, planetY;  // Position of PLANET button
   int starX, starY;      // Position of STAR button
@@ -8,51 +7,49 @@ class Button {
   int undoX, undoY;
   int deleteX, deleteY;
 
+  // Button Sizes
   int asterSize = 60;    // Diameter of ASTEROID button
   int planetSize = 60;   // Diameter of PLANET
   int starSize = 60;     // Diameter of STAR button
   int randSize = 63;     // Diameter of RANDADD button
   int undoSize = 60;
   int deleteSize = 60;
-  Boolean stateJustChanged = false;
 
+  // Button Colors
   color asterColor, planetColor, starColor, randColor, baseColor, deleteColor;
   color asterHighlight, planetHighlight, starHighlight, randHighlight;
   color currentColor;
   color undoColor;
+
+  // State Variables
+  // *If over a button
   boolean asterOver = false;
   boolean planetOver = false;
   boolean starOver = false;
   boolean randOver = false;
   boolean undoOver = false;
   boolean deleteOver = false;
-
+  // *If a button is pressed
   boolean asterPressed = false;
   boolean planetPressed = false;
   boolean starPressed = false;
   boolean randPressed = false;
   boolean undoPressed = false;
   boolean deletePressed = false;
-  boolean finish = false;
-  //----------------------------------------------------------------------
+  boolean stateJustChanged = false;
 
-  //FOOTER SETUP----------------------------------------------------------
+  // Footer Variables
   int footerX, footerY;
   int footerHeight = 100;
   int footerWidth = 600;
   color footerColor;
-  //----------------------------------------------------------------------
 
   void setup() {
-    // size(1000, 700);
-
-    //BUTTON--------------------
+    // Initialize button colors 
     deleteColor = color(255, 255, 255);
     asterColor = color(255, 0, 128);
     asterHighlight = color(255, 0, 128, 191);
-    planetColor = color(163, 73, 164);
     planetHighlight = color(163, 73, 164, 191);
-    starColor = color(0, 0, 255);
     starHighlight = color(0, 0, 255, 191);
     randColor = color(255);
     randHighlight = color(209);
@@ -74,23 +71,37 @@ class Button {
     deleteX = 500;
     deleteY = height/2+270;
 
-    //--------------------------
-
     // Sets up toolbar dimensions
     footerColor = color(#89c6de);
     footerX = 0;
-    footerY = height-footerHeight;
+    footerY = height - footerHeight;
   }
 
 
   void draw() {
+    // Update the location of the mouse to see if it is over a button or not
     update(mouseX, mouseY);
-    background(currentColor);
 
-    // Footer
+    // Draw the background and footer
+    background(currentColor);
     fill(footerColor);
     rect(footerX, footerY, footerWidth, footerHeight);
 
+    if (randOver) {
+      fill(randHighlight);
+    } else {
+      fill(randColor);
+    }
+    noStroke();
+    fill(255);
+    ellipse(50, 650, 70, 70);
+    fill(255, 128, 0);
+    ellipseMode(CENTER);
+    ellipse(50, 650, 60, 60);
+    fill(255);
+    textSize(16);
+    textAlign(CENTER);
+    text("RANDOM", 50, 650);
 
     if (asterOver) {
       fill(asterHighlight);
@@ -100,7 +111,7 @@ class Button {
     noStroke();
     fill(255);
     ellipse(150, 650, 70, 70);
-    fill(asterColor);
+    fill(164, 91, 94);
     ellipseMode(CENTER);
     ellipse(150, 650, 60, 60);
     fill(0);
@@ -115,14 +126,13 @@ class Button {
     noStroke();
     fill(255);
     ellipse(250, 650, 70, 70);
-    fill(34, 120, 0);
+    fill(159, 96, 143);
     ellipseMode(CENTER);
     ellipse(250, 650, 60, 60);
     fill(0);
     textSize(16);
     textAlign(CENTER);
     text("PLANET", 250, 650);
-
 
     if (starOver) {
       fill(starHighlight);
@@ -132,30 +142,13 @@ class Button {
     noStroke();
     fill(255);
     ellipse(350, 650, 70, 70);
-    fill(133, 50, 150);
+    fill(245, 204, 10);
     ellipseMode(CENTER);
     ellipse(350, 650, 60, 60);
     fill(255);
     textSize(16);
     textAlign(CENTER);
     text("STAR", 350, 650);
-
-
-    if (randOver) {
-      fill(randHighlight);
-    } else {
-      fill(randColor);
-    }
-    noStroke();
-    fill(255);
-    ellipse(50, 650, 70, 70);
-    fill(133, 50, 150);
-    ellipseMode(CENTER);
-    ellipse(50, 650, 60, 60);
-    fill(255);
-    textSize(16);
-    textAlign(CENTER);
-    text("RANDOM", 50, 650);
 
     stroke(255);
     rect(undoX, undoY, starSize, starSize);
@@ -199,6 +192,7 @@ class Button {
       stateJustChanged = true;
       delay(300);
     }
+    // Planet Button Pressed
     if (planetPressed) {
       planetPressed = false;
       state = 1;
@@ -206,17 +200,21 @@ class Button {
 
       delay(300);
     }
+    // Star Button Pressed
     if (starPressed) {
       state = 3;
       starPressed = false;
       stateJustChanged = true;
       starPressed = false;
     }
+    // Remove Last Button Pressed
     if (undoPressed) {
       removeLast(); 
       delay(300);
       undoPressed = false;
     }
+    
+    // Delete an object
     int c = deleteX+deleteSize/2;
     int v = deleteY + deleteSize/2;
     if (mouseX>c-40 && mouseX<c+40 && mouseY>v-40 && mouseY<v+40 && mousePressed) {
@@ -229,12 +227,20 @@ class Button {
         delay(300);
       }
     }
-    if (! stateJustChanged) {
+    if (!stateJustChanged) {
       makeObject();
     }
     stateJustChanged = false;
   }
 
+  // Remove the last object added via the lastAdded ArrayList
+  void removeLast() {
+    if (lastAdded.size() > 0) {
+      lastAdded.remove( lastAdded.size() - 1);
+    }
+  }
+
+  // Updates the variables according to the mouse's new position
   void update(int x, int y) {
     if ( overRand(randX, randY, randSize) ) {
       randOver = true;

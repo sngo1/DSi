@@ -1,12 +1,11 @@
-class Asteroid implements CelestialObject{
+class Asteroid implements CelestialObject {
   PImage asteroid = loadImage("asteroid.png");
-  
+
   float radius = 10;
   float xCor;
   float yCor;
   float xSpeed;
   float ySpeed;
-
 
   Asteroid(int firstX, int firstY, int secondX, int secondY) {
     xCor = firstX;
@@ -15,31 +14,27 @@ class Asteroid implements CelestialObject{
     ySpeed = secondY - firstY;
   }
 
-  void draw(){
-   image(asteroid, xCor, yCor, 30, 30);
-   this.move();
+  void draw() {
+    // Consistently update and redraw the asteroid position
+    image(asteroid, xCor, yCor, 30, 30);
+    this.move();
   }
-  
-  void crash(){
+
+  void move() {
+    // Reduce speed
+    xCor += xSpeed / 60;
+    yCor += ySpeed / 60;
   }
-  
-  int objectType(){
-    return 2;
+
+  // Determines is mouse is over asteroid
+  Boolean isMouseOver() {
+    if (mouseX > xCor - radius && mouseX < xCor + radius && mouseY > yCor - radius && mouseY < yCor + radius) {
+      return true;
+    }
+    return false;
   }
-  
-  void move(){
-   xCor += xSpeed / 60;
-   yCor += ySpeed / 60;
-  }
-  
-  Boolean isMouseOver(){
-      if(mouseX > xCor - radius && mouseX < xCor + radius && mouseY > yCor - radius && mouseY < yCor + radius){
-    return true; 
-   }
-   return false; 
-  }
-  
-  String toString(){
+
+  String toString() {
     return "Asteroid";
   }
 }
