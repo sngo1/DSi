@@ -42,7 +42,7 @@ class Star implements CelestialObject {
     return 0;
   }
 
-  Boolean isMouseOver() {
+  boolean isMouseOver() {
     if (mouseX > xCor - radius && mouseX < xCor + radius && mouseY > yCor - radius && mouseY < yCor + radius)
     {
       return true;

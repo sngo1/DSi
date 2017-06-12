@@ -1,6 +1,4 @@
-interface CelestialObject{
-  public int counts = 99;
-  
+interface CelestialObject{  
   void draw();
-  Boolean isMouseOver();
+  boolean isMouseOver();
 }

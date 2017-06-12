@@ -27,7 +27,7 @@ class Asteroid implements CelestialObject {
   }
 
   // Determines is mouse is over asteroid
-  Boolean isMouseOver() {
+  boolean isMouseOver() {
     if (mouseX > xCor - radius && mouseX < xCor + radius && mouseY > yCor - radius && mouseY < yCor + radius) {
       return true;
     }

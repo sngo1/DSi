@@ -26,22 +26,17 @@ class Planet implements CelestialObject {
   void draw() {
     orbit();
     if(planetType == 0){
-      image(planet1, (float)  xCor, (float) yCor, 30, 30);
+      image(planet1, xCor, yCor, 30, 30);
     }
-    else if(planetType ==1){
-      image(planet2, (float)  xCor, (float) yCor, 70, 70);      
+    else if(planetType == 1){
+      image(planet2, xCor, yCor, 70, 70);      
     }
-    else if(planetType ==2){
-        image(planet3, (float)  xCor, (float) yCor, 40, 40);
+    else if(planetType == 2){
+        image(planet3, xCor, yCor, 40, 40);
     }
-    else if(planetType ==3){
-      image(planet4, (float)  xCor, (float) yCor, 20, 20);      
+    else if(planetType == 3){
+      image(planet4, xCor, yCor, 20, 20);      
     }
-    //noStroke();
-    //ellipse ( xCor, yCor, 2 * planetRadius, 2 * planetRadius);
-    //fill(c);
-    
-    println(counts);  
   }
 
   void crash() {
@@ -107,7 +102,7 @@ class Planet implements CelestialObject {
     }
   }
   
-  Boolean isMouseOver(){
+  boolean isMouseOver(){
    if(mouseX > xCor - planetRadius && mouseX < xCor + planetRadius && mouseY > yCor - planetRadius && mouseY < yCor + planetRadius){
     return true; 
    }
