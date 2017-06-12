@@ -10,7 +10,7 @@
 `$ cd DSi/Solar_System/`
 5. Finally, start up your new solar system by running:
 `$ processing Solar_System.pde`
-and then pressing **PLAY**.
+and then pressing starting the program.
 
 ## The Big Bang Theory
 Welcome to your very own solar system! This is a solar system simulation, where you will be able to add and remove asteroids, planets, and stars. We hope you enjoy a peek into an alternate universe!
