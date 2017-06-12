@@ -4,9 +4,8 @@ class Planet implements CelestialObject {
   PImage planet2 = loadImage("planet2.png");
   PImage planet3 = loadImage("planet3.png");
   PImage planet4 = loadImage("planet4.png");
-  
-  float planetRadius = 16;
-  // double speed;
+
+  float planetRadius = (int) random(5,31);
   float xCor;
   float yCor;
   float scaledOrbitR;
@@ -15,27 +14,42 @@ class Planet implements CelestialObject {
   float q;
   float changeX = 1;
   int planetType;
+  color c;
+  int r = (int) random(256);
+  int g = (int) random(256);
+  int b = (int) random(256);
 
   Planet(int x, int y) {
     xCor = x;
     yCor = y;
     scaledOrbitR = getOrbitRad();
-    planetType = (int) random(4);
+    planetType = (int) random(100);
   }
 
   void draw() {
     orbit();
-    if(planetType == 0){
+    if (planetType <= 10) {
       image(planet1, xCor, yCor, 30, 30);
-    }
-    else if(planetType == 1){
-      image(planet2, xCor, yCor, 70, 70);      
-    }
-    else if(planetType == 2){
-        image(planet3, xCor, yCor, 40, 40);
-    }
-    else if(planetType == 3){
-      image(planet4, xCor, yCor, 20, 20);      
+    } else if (planetType <= 20) {
+      image(planet2, xCor, yCor, 70, 70);
+    } else if (planetType <= 30) {
+      image(planet3, xCor, yCor, 40, 40);
+    } else if (planetType <= 40) {
+      image(planet4, xCor, yCor, 25, 25);
+    } else if (planetType <= 45) {
+      int r = (int) random(256);
+      int g = (int) random(256);
+      int b = (int) random(256);
+
+      noStroke();
+      c = color(r, g, b);
+      fill(c);
+      ellipse(xCor, yCor, planetRadius * 2, planetRadius * 2);
+    } else {
+      noStroke();
+      c = color(r, g, b);
+      fill(c);
+      ellipse(xCor, yCor, planetRadius * 2, planetRadius * 2);
     }
   }
 
@@ -62,11 +76,9 @@ class Planet implements CelestialObject {
       } else {
         thirdQuad = true;
       }
-    } 
-    else if (yCor == yCenter) {
+    } else if (yCor == yCenter) {
       q = 2;
-    } 
-    else {
+    } else {
       if (yCor > yCenter) {
         fourthQuad = true;
       } else {
@@ -80,12 +92,12 @@ class Planet implements CelestialObject {
     } else if ( thirdQuad || fourthQuad) {
       q = 1;
     }
-    
+
     return r;
   }  
 
 
- void orbit() {
+  void orbit() {
     if ( xCor >= xCenter + scaledOrbitR) {
       changeX = -1;
       q = 0;
@@ -101,15 +113,15 @@ class Planet implements CelestialObject {
       yCor = yCenter - sqrt(sq(scaledOrbitR) - sq(xCor-xCenter));
     }
   }
-  
-  boolean isMouseOver(){
-   if(mouseX > xCor - planetRadius && mouseX < xCor + planetRadius && mouseY > yCor - planetRadius && mouseY < yCor + planetRadius){
-    return true; 
-   }
-   return false;
+
+  boolean isMouseOver() {
+    if (mouseX > xCor - planetRadius && mouseX < xCor + planetRadius && mouseY > yCor - planetRadius && mouseY < yCor + planetRadius) {
+      return true;
+    }
+    return false;
   }
-  
-  String toString(){
+
+  String toString() {
     return "Planet";
   }
 }

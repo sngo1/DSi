@@ -45,17 +45,6 @@ class Button {
   color footerColor;
 
   void setup() {
-    // Initialize button colors 
-    deleteColor = color(255, 255, 255);
-    asterColor = color(255, 0, 128);
-    asterHighlight = color(255, 0, 128, 191);
-    planetHighlight = color(163, 73, 164, 191);
-    starHighlight = color(0, 0, 255, 191);
-    randColor = color(255);
-    randHighlight = color(209);
-    baseColor = color(0);
-    currentColor = baseColor;
-
     // Sets the coordinates
     asterX = 150;
     asterY = 650;
@@ -141,7 +130,7 @@ class Button {
     if (starOver) {
       fill(200);
     } else {
-    fill(245, 204, 10);
+      fill(245, 204, 10);
     }
     ellipseMode(CENTER);
     ellipse(350, 650, 60, 60);
@@ -157,7 +146,7 @@ class Button {
     if (undoOver) {
       fill(200);
     } else {
-    fill(218, 37, 123);
+      fill(218, 37, 123);
     }
     ellipseMode(CENTER);
     ellipse(450, 650, 60, 60);
@@ -173,7 +162,7 @@ class Button {
     if (deleteOver) {
       fill(200);
     } else {
-    fill(234, 21, 53);
+      fill(234, 21, 53);
     }
     ellipseMode(CENTER);
     ellipse(550, 650, 60, 60);

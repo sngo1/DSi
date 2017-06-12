@@ -16,7 +16,7 @@ class Asteroid implements CelestialObject {
 
   void draw() {
     // Consistently update and redraw the asteroid position
-    image(asteroid, xCor, yCor, 30, 30);
+    image(asteroid, xCor, yCor, 50, 50);
     this.move();
   }
 
