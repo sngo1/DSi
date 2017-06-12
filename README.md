@@ -19,7 +19,7 @@ Welcome to your very own solar system! This is a solar system simulation, where 
 - ##### Add a planet - after clicking this button, click anywhere in the solar system to start a circular orbit around the Sun. 
 - ##### Add a star - after clicking this button, click anywhere in the solar system to place an immobile star.
 - ##### Remove last added object - click on the remove last button.
-- ##### Delete an object - Click on the delete button, then click on what you want to delete. If you don't want to delete anything but have already clicked the delete button, click on the button again, or any other button.
+- ##### Delete an object - click on the delete button, then click on what you want to delete. If you don't want to delete anything but have already clicked the delete button, click on the button again, or any other button.
 ## FAQs
 #### Q: There are too many choices! I can't decide what to put in my universe.
 A: Try the **RANDOM** button and let artificial randomness decide for you.
