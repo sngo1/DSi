@@ -70,14 +70,14 @@ void draw() {
   // Draw Finish Button
   noStroke();
   fill(255);
-  ellipse(550, 50, 70, 70);
+  ellipse(540, 60, 60, 60);
   fill(133, 0, 0);
   ellipseMode(CENTER);
-  ellipse(550, 50, 60, 60);
+  ellipse(540, 60, 50, 50);
   fill(255);
   textSize(16);
   textAlign(CENTER);
-  text("DONE", 550, 50);
+  text("FIN", 540, 65);
 
   // If Finish Button selected, initiate end page and ellipse
   if ((sqrt(sq(mouseX - 550) + sq(mouseY - 50)) <= 35) && mousePressed) {
@@ -88,13 +88,15 @@ void draw() {
 
   // Finish page initiated; draw finish page
   if (finish) {
+    // Draw finish screen
+    background(0);
+    text("FIN", 300, 150);
+    
     // Count the number of objects left in the solar system
     int asteroids = 0;
     int planets = 0;
     int stars = 0;
 
-    background(0, 0);
-    text("FIN", 300, 150);
     for (CelestialObject e : lastAdded) {
       if (e.toString().equals("Asteroid")) {
         asteroids += 1;
@@ -114,7 +116,7 @@ void draw() {
     text("Planets: " + planets, 300, 450);
 
     // Display Image
-    image(end, 300, 600, 510, 80);
+    image(end, 300, 600, 530, 80);
 
     // Orbiting Sphere
     fill(255);

@@ -72,7 +72,7 @@ class Button {
     deleteY = height/2+270;
 
     // Sets up toolbar dimensions
-    footerColor = color(#89c6de);
+    footerColor = color(#47476b);
     footerX = 0;
     footerY = height - footerHeight;
   }
@@ -87,27 +87,19 @@ class Button {
     fill(footerColor);
     rect(footerX, footerY, footerWidth, footerHeight);
 
-    if (randOver) {
-      fill(randHighlight);
-    } else {
-      fill(randColor);
-    }
+    // Draws Random Button
     noStroke();
     fill(255);
     ellipse(50, 650, 70, 70);
     fill(255, 128, 0);
     ellipseMode(CENTER);
     ellipse(50, 650, 60, 60);
-    fill(255);
+    fill(0);
     textSize(16);
     textAlign(CENTER);
-    text("RANDOM", 50, 650);
+    text("RANDOM", 50, 655);
 
-    if (asterOver) {
-      fill(asterHighlight);
-    } else {
-      fill(asterColor);
-    }
+    // Draws Asteroid Button
     noStroke();
     fill(255);
     ellipse(150, 650, 70, 70);
@@ -116,13 +108,9 @@ class Button {
     ellipse(150, 650, 60, 60);
     fill(0);
     textAlign(CENTER);
-    text("ASTEROID", 150, 650);
+    text("ASTEROID", 150, 655);
 
-    if (planetOver) {
-      fill(planetHighlight);
-    } else {
-      fill(planetColor);
-    }
+    // Draws Planet Button
     noStroke();
     fill(255);
     ellipse(250, 650, 70, 70);
@@ -132,59 +120,43 @@ class Button {
     fill(0);
     textSize(16);
     textAlign(CENTER);
-    text("PLANET", 250, 650);
+    text("PLANET", 250, 655);
 
-    if (starOver) {
-      fill(starHighlight);
-    } else {
-      fill(starColor);
-    }
+    // Draws Star Button
     noStroke();
     fill(255);
     ellipse(350, 650, 70, 70);
     fill(245, 204, 10);
     ellipseMode(CENTER);
     ellipse(350, 650, 60, 60);
-    fill(255);
+    fill(0);
     textSize(16);
     textAlign(CENTER);
-    text("STAR", 350, 650);
-    
+    text("STAR", 350, 655);
+
+    // Draws Remove Last Button
     noStroke();
     fill(255);
     ellipse(450, 650, 70, 70);
     fill(218, 37, 123);
     ellipseMode(CENTER);
     ellipse(450, 650, 60, 60);
-    fill(255);
+    fill(0);
     textSize(16);
     textAlign(CENTER);
-    text("REMOVE LAST", 450, 650);
+    text("REMOVE LAST", 450, 655);
 
+    // Draws Delete Button
     noStroke();
     fill(255);
     ellipse(550, 650, 70, 70);
     fill(234, 21, 53);
     ellipseMode(CENTER);
     ellipse(550, 650, 60, 60);
-    fill(255);
+    fill(0);
     textSize(16);
     textAlign(CENTER);
-    text("DELETE", 550, 650);
-    
-    /*
-
-    stroke(255);
-    rect(undoX, undoY, starSize, starSize);
-    text("REMOVE LAST", undoX + 30, undoY);
-    fill(undoColor);
-
-    stroke(255);
-    rect(deleteX, deleteY, deleteSize, deleteSize);
-    text("DELETE", deleteX + 30, deleteY);
-    fill(deleteColor);
-    */
-    //-------------------------
+    text("DELETE", 550, 655);
 
     if (randPressed) {
       randPressed = false;
@@ -264,108 +236,18 @@ class Button {
       lastAdded.remove( lastAdded.size() - 1);
     }
   }
+  
+  // Determines if mouse is in solar system space
+  boolean inSystem(int x, int y) {
+    if (mouseX >= x && mouseX <= x+600 && 
+      mouseY >= y && mouseY <= y+600) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-  /*
-  // Updates the variables according to the mouse's new position
-   void update(int x, int y) {
-   if ( overRand(randX, randY, randSize) ) {
-   randOver = true;
-   asterOver = false;
-   planetOver = false;
-   starOver = false;
-   } else if ( overAster(asterX, asterY, asterSize, asterSize) ) {
-   asterOver = true;
-   planetOver = false;
-   starOver = false;
-   randOver = false;
-   } else if ( overPlanet(planetX, planetY, planetSize, planetSize) ) {
-   planetOver = true;
-   asterOver = false;
-   starOver = false;
-   randOver = false;
-   } else if ( overStar(starX, starY, starSize, starSize) ) {
-   starOver = true;
-   asterOver = false;
-   planetOver = false;
-   randOver = false;
-   } else if (overUndo()) {
-   undoOver = true;
-   if (mousePressed) {
-   undoPressed = true;
-   }
-   } else {
-   randOver = asterOver = planetOver = starOver = false;
-   }
-   
-   if (mousePressed == true && overRand(randX, randY, randSize) ) {
-   randPressed = true;
-   } else if (mousePressed == true && overAster(asterX, asterY, asterSize, asterSize) ) {
-   asterPressed = true;
-   } else if (mousePressed == true && overPlanet(planetX, planetY, planetSize, planetSize) ) {
-   planetPressed = true;
-   } else if (mousePressed == true && overStar(starX, starY, starSize, starSize) ) {
-   starPressed = true;
-   }
-   }
-   
-   boolean overAster(int x, int y, int width, int height) {
-   if (mouseX >= asterX-40 && mouseX <= asterX+40 && 
-   mouseY >= asterY-40 && mouseY <= asterY+40) {
-   return true;
-   } else {
-   return false;
-   }
-   }
-   
-   boolean overUndo() {
-   float w = undoX + starSize/2;
-   float e = undoY +starSize/2;
-   if (mouseX < w+30 && mouseX > w-30 && mouseY > e - 30 && mouseY < e +30) {
-   return true;
-   } else {
-   return false;
-   }
-   }
-   
-   boolean overPlanet(int x, int y, int width, int height) {
-   if (mouseX >= planetX-40 && mouseX <= planetX+40 && 
-   mouseY >= planetY-40 && mouseY <= planetY+40) {
-   return true;
-   } else {
-   return false;
-   }
-   }
-   
-   boolean overStar(int x, int y, int width, int height) {
-   if (mouseX >= starX-40 && mouseX <= starX+40 && 
-   mouseY >= starY-40 && mouseY <= starY+40) {
-   return true;
-   } else {
-   return false;
-   }
-   }
-   
-   boolean overRand(int x, int y, int diameter) {
-   float disX = x - mouseX;
-   float disY = y - mouseY;
-   if (sqrt(sq(disX) + sq(disY)) < diameter/2 ) {
-   return true;
-   } else {
-   return false;
-   }
-   }
-   */
-   
-   boolean inSystem(int x, int y) {
-   if (mouseX >= x && mouseX <= x+600 && 
-   mouseY >= y && mouseY <= y+600) {
-   return true;
-   } else {
-   return false;
-   }
-   }
-   
-
+  // Determines if the mouse is over a button
   boolean ifOver(int x) {
     // Radius Threshold <= 35
     float calcRadius = sqrt(sq(mouseX - x) + sq(mouseY - 650));
@@ -376,6 +258,7 @@ class Button {
     }
   }
 
+  // Updates the variables according to the mouse's new position
   boolean update() {
     // Random button
     if (ifOver(50)) {
