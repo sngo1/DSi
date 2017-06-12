@@ -66,6 +66,8 @@ void draw() {
   text("DONE", 550, 50);
 
   if ((sqrt(sq(mouseX - 550) + sq(mouseY - 50)) <= 35) && mousePressed) {
+    xCor = 170;
+    yCor = 400;
     finish = true;
   }
 
@@ -88,11 +90,28 @@ void draw() {
     textSize(25);
     textAlign(CENTER);
     text("What's left of your solar system:", 300, 250);
-    text("Stars: " + stars, 300, 300);
-    text("Asteroids: " + asteroids, 300, 350);
-    text("Planets: " + planets, 300, 400);
+    text("Stars: " + stars, 300, 350);
+    text("Asteroids: " + asteroids, 300, 400);
+    text("Planets: " + planets, 300, 450);
 
-    image(end, 300, 500, 510, 80);
+    image(end, 300, 600, 510, 80);
+    
+    fill(255);
+    ellipse(xCor, yCor, 30, 30);
+    if ( xCor >= 300 + 120) {
+      changeX = -1;
+      q = 0;
+    } else if (xCor <= 300 - 120) {
+      changeX = 1;
+      q = 1;
+    }
+    xCor += changeX; 
+
+    if ( q == 1) {
+      yCor = 400 + sqrt(sq(120) - sq(xCor-300));
+    } else if ( q == 0) {
+      yCor = 400 - sqrt(sq(120) - sq(xCor-300));
+    }
   }
 
   if (start) {
