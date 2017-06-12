@@ -2,6 +2,11 @@ int numStars; // Can't be greater than 5
 Boolean delete = false;
 int state = 0; // 0 does nothing, 1 adds planets, 2 adds asteroids
 boolean finish = false;
+boolean start = true;
+float xCor 150;
+float yCor = 407;
+int changeX = 1;
+int q;
 
 Button test;
 
@@ -88,6 +93,41 @@ void draw() {
     text("Planets: " + planets, 300, 400);
 
     image(end, 300, 500, 510, 80);
+  }
+
+  if (start) {
+    background(255);
+
+    noStroke();
+    fill(133, 0, 0);
+    ellipse(300, 400, 70, 70);
+    fill(255);
+    ellipseMode(CENTER);
+    ellipse(300, 400, 60, 60);
+    fill(0);
+    textSize(16);
+    textAlign(CENTER);
+    text("START", 300, 407);
+
+    if ((sqrt(sq(mouseX - 300) + sq(mouseY - 407)) <= 35) && mousePressed) {
+      start = false;
+    }
+
+    ellipse(xCor, yCor, 30, 30);
+    if ( xCor >= 300 + 150) {
+      changeX = -1;
+      q = 0;
+    } else if (xCor <= 300 - 150) {
+      changeX = 1;
+      q = 1;
+    }
+    xCor += changeX; 
+
+    if ( q == 1) {
+      yCor = 407 + sqrt(sq(150) - sq(xCor-300));
+    } else if ( q == 0) {
+      yCor = 407 - sqrt(sq(150) - sq(xCor-300));
+    }
   }
 }
 
