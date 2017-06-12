@@ -108,7 +108,7 @@ void draw() {
     // Display Stats
     textSize(25);
     textAlign(CENTER);
-    text("What's left of your solar system:", 300, 250);
+    text("What's left of your solar system:", 300, 220);
     text("Stars: " + stars, 300, 350);
     text("Asteroids: " + asteroids, 300, 400);
     text("Planets: " + planets, 300, 450);
