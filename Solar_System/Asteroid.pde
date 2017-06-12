@@ -1,4 +1,4 @@
-class Asteroid implements CelestialObject {
+class Asteroid implements CelestialObject{
   PImage asteroid = loadImage("asteroid.png");
   
   float radius = 10;
@@ -39,4 +39,7 @@ class Asteroid implements CelestialObject {
    return false; 
   }
   
+  String toString(){
+    return "Asteroid";
+  }
 }

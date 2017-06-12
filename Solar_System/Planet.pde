@@ -40,6 +40,8 @@ class Planet implements CelestialObject {
     //noStroke();
     //ellipse ( xCor, yCor, 2 * planetRadius, 2 * planetRadius);
     //fill(c);
+    
+    println(counts);  
   }
 
   void crash() {
@@ -110,5 +112,9 @@ class Planet implements CelestialObject {
     return true; 
    }
    return false;
+  }
+  
+  String toString(){
+    return "Planet";
   }
 }

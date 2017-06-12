@@ -33,6 +33,7 @@ class Button {
   boolean randPressed = false;
   boolean undoPressed = false;
   boolean deletePressed = false;
+  boolean finish = false;
   //----------------------------------------------------------------------
 
   //FOOTER SETUP----------------------------------------------------------
@@ -158,14 +159,14 @@ class Button {
 
     stroke(255);
     rect(undoX, undoY, starSize, starSize);
-    text("REMOVE LAST", undoX, undoY);
+    text("REMOVE LAST", undoX + 30, undoY);
     fill(undoColor);
 
     stroke(255);
     rect(deleteX, deleteY, deleteSize, deleteSize);
-    text("DELETE", deleteX, deleteY);
+    text("DELETE", deleteX + 30, deleteY);
     fill(deleteColor);
-    //--------------------------
+    //-------------------------
 
     if (randPressed) {
       randPressed = false;
@@ -206,9 +207,9 @@ class Button {
       delay(300);
     }
     if (starPressed) {
-       state = 3;
-        starPressed = false;
-        stateJustChanged = true;
+      state = 3;
+      starPressed = false;
+      stateJustChanged = true;
       starPressed = false;
     }
     if (undoPressed) {
@@ -228,8 +229,8 @@ class Button {
         delay(300);
       }
     }
-    if(! stateJustChanged){
-    makeObject();
+    if (! stateJustChanged) {
+      makeObject();
     }
     stateJustChanged = false;
   }
@@ -349,16 +350,16 @@ class Button {
           Planet p = new Planet(addX, addY);
           lastAdded.add(p);
         }
-      }else if (state == 3) {
-          if (inSystem(mouseX, mouseY)) {
-            int addX = mouseX;
-            int addY = mouseY;
-            Star q = new Star(addX, addY);
-            q.add();
-            lastAdded.add(q);
-          }
+      } else if (state == 3) {
+        if (inSystem(mouseX, mouseY)) {
+          int addX = mouseX;
+          int addY = mouseY;
+          Star q = new Star(addX, addY);
+          q.add();
+          lastAdded.add(q);
         }
-        state = 0;
       }
+      state = 0;
     }
   }
+}
